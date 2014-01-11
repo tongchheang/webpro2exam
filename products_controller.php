@@ -7,7 +7,7 @@ class ProductsController {
         // 何かの処理...
 
         	    
-	    $model_data = Product::all();	    
+	    $products = Product::all();	    
 
         // $model_data = array('テレビ', '掃除機', '洗濯機');
         include('header.php');

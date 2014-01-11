@@ -17,27 +17,22 @@ class Product {
         $pdo = new PDO('mysql:host=127.0.0.1;dbname=webpro2examdb;charset=utf8;', 'root', '');
         $stmt = $pdo->query('SELECT * FROM Products');
 
-        $model_data = array();
+        $products = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            // echo implode(', ', $row) . PHP_EOL . '<br />';
-            array_push($model_data, $row['name']);
+            $product = new Product($row);
+            array_push($products, $product);
         }
 
-        return $model_data;
+        return $products;
     }
 
     public static function load($id) {
         $pdo = new PDO('mysql:host=127.0.0.1;dbname=webpro2examdb;charset=utf8;', 'root', '');
         $stmt = $pdo->query('SELECT * FROM Products WHERE id=' . $id);
-
-        $model_data = array();
+        
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $model_data['id'] = $row['id'];
-        $model_data['name'] = $row['name'];
-        $model_data['price'] = $row['price'];
-
-        $product = new Product($model_data);
-
+        $product = new Product($row);
+        
         return $product;
     }
 

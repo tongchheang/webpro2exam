@@ -6,12 +6,14 @@
     <p class="lead">
         <ul class="products">
         	<?php
-          	echo "<li><a href=''>";
-          	echo "${name}</a></li>";          
+        	 foreach ($products as $product) {
+	        	 echo "<li>";
+	        	 echo "<a href='sales_controller.php?product=". $product->getId() ."'>";
+          		 echo $product->getName(). "</a></li>";           	 	
+	        }
+          	
            	?>
-
     	</ul>
-    
     </p>
 </div>
 </body>

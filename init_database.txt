@@ -3,7 +3,7 @@ use webpro2examdb;
 
 create table Products (id integer, name varchar(255), price integer);
 
-create table Sales (id integer, product_id integer, sales_at DATETIME, quantify integer);
+create table Sales (id integer primary key AUTO_INCREMENT, product_id integer, sales_at DATETIME, quantity integer);
 
 INSERT INTO products (id, name, price) VALUES
     (1, 'ふとんクリーナー', 28800),

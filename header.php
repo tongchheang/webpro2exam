@@ -41,8 +41,8 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">商品一覧</a></li>
-            <li><a href="sales.html">売上一覧</a></li>
+            <li class="active"><a href="products_controller.php">商品一覧</a></li>
+            <li><a href="sales_controller.php">売上一覧</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

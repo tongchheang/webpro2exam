@@ -1,11 +1,14 @@
 <?php
 
+include_once('product.php');
+
 class Sale {
 
     private $id;
     private $product_id;
     private $sales_at;
     private $quantity;
+    private $product;
 
     public function __construct($params) {
         $this->id         = isset($params['id']) ? $params['id'] : null;
@@ -15,17 +18,19 @@ class Sale {
     }
 
 
-    public static function all() {
+    public static function all() {        
         $pdo = new PDO('mysql:host=127.0.0.1;dbname=webpro2examdb;charset=utf8;', 'root', '');
         $stmt = $pdo->query('SELECT * FROM Sales');
 
-        $model_data = array();
+        $sales = array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            // echo implode(', ', $row) . PHP_EOL . '<br />';
-            array_push($model_data, $row['id'], $row['product_id'], $row['sales_at'], $row['quantity']);
+            $sale = new Sale($row);
+            $product = Product::load($sale->getProductId());
+            $sale->setProduct($product);
+            array_push($sales, $sale);
         }
 
-        return $model_data;
+        return $sales;
     }
 
     public function save() {
@@ -43,11 +48,23 @@ class Sale {
         return $this->product_id;
     }
 
+    public function setProduct($product){
+        $this->product = $product;
+    }
+
+    public function getProduct(){
+        return $this->product;
+    }
+
     public function setProductId($product_id) {
         $this->product_id = $product_id;
     }
 
     public function getSalesAt() {
+        return $this->sales_at;
+    }
+
+    public function getSalesAtFormatted() {
         return $this->sales_at;
     }
 
